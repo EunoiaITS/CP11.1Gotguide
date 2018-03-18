@@ -335,7 +335,7 @@
                     <!-- header got seach area -->
                     <div class="popup-got-search popup-available-picker">
                         <form method="post" action="{{ url('delete-packages') }}">
-                            <p>Do you really want to delete ?</p>
+                            <p>Are you sure you want to delete this Package?</p>
                             <input type="hidden" name="package_id" id="package-delete-id" value="">
                             <button type="submit" class="btn btn-info btn-change">Yes</button>
                             <button type="button" class="btn btn-info btn-change close">No</button>
