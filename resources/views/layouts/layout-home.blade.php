@@ -18,6 +18,8 @@
                 @include('includes.navbar-user')
             @elseif(Auth::user()->role =="agent")
                 @include('includes.navbar-guide')
+            @elseif(Request::url() === 'search-result')
+                @include('includes.navbar-search')
             @else
                 @include('includes.navbar')
             @endif
