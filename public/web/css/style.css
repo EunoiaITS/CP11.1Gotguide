@@ -950,7 +950,7 @@ User edit profle page
 }
 .user-social-media li a i{
     color: #fff;
-    font-size: 17px;
+    font-style: 17px;
     padding-right: 5px;
      transition: all .2s linear 0s;
 }
@@ -1289,7 +1289,8 @@ Search popup
 .popup-image-wrapper,
 .popup-reset-open,
 .popup-shopping-card,
-.log-out-confermation-popup{
+.log-out-confermation-popup,
+.delete-popup-package{
     height: 100%;
     width: 100%;
     z-index: 1000000;
@@ -1310,7 +1311,8 @@ Search popup
 .popup-image-wrapper:before,
 .popup-reset-open:before,
 .popup-shopping-card:before,
-.log-out-confermation-popup:before{
+.log-out-confermation-popup:before,
+.delete-popup-package:before{
     content: "";
     height: 100%;
     width: 100%;
@@ -2058,7 +2060,7 @@ Responsive area
         font-size: 13px;
     }
     .btn.btn-info.u_login{
-        font-size: 17px !important;
+        font-size: 17px !imporant;
     }
     .user-birth-date .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
         width: 100%;
