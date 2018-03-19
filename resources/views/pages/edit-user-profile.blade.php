@@ -98,10 +98,9 @@
             </div>
         </div>
     </div>
-
     <!--=============
         Search popuppage
         ==================-->
     @include('includes.search-modal')
-    <!-- Popup -->
     @endsection
+

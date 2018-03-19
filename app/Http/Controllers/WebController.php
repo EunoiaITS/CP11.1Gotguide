@@ -15,10 +15,19 @@ use App\VerifyUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 use Auth;
 
 class WebController extends Controller
 {
+    public function __construct()
+    {
+        $languages = Languages::all();
+        $cities = Cities::all();
+        $countries = Countries::all();
+        View::share(['languages'=> $languages,'cities'=>$cities,'countries'=>$countries]);
+    }
+
     public function home(){
         return view('landing-page.landing');
     }
@@ -468,7 +477,6 @@ class WebController extends Controller
                 ->with('gs-message', 'Something went wrong!');
         }
     }
-
     public function guideLogin(Request $request){
         if(Auth::user()){
             return redirect()->to('profile/guide');
