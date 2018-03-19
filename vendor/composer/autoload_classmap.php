@@ -10,6 +10,7 @@ return array(
     'CreateAgentRatingTable' => $baseDir . '/database/migrations/sdawfawgwa/2016_11_12_033139_create_agent_rating_table.php',
     'CreateCitiesTable' => $baseDir . '/database/migrations/2018_01_04_183823_create_cities_table.php',
     'CreateCountriesTable' => $baseDir . '/database/migrations/2018_01_04_202644_create_countries_table.php',
+    'CreateGuideLinkTable' => $baseDir . '/database/migrations/2018_03_19_112229_create_guide_link_table.php',
     'CreateLanguagesTable' => $baseDir . '/database/migrations/2018_01_04_151708_create_languages_table.php',
     'CreatePackageRatingTable' => $baseDir . '/database/migrations/sdawfawgwa/2016_11_12_033228_create_package_rating_table.php',
     'CreatePackagesTable' => $baseDir . '/database/migrations/sdawfawgwa/2016_11_09_145744_create_packages_table.php',

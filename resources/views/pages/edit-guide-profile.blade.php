@@ -152,9 +152,9 @@
                         <div class="form-group social-media-new user-edit-group clearfix">
                             <label for="guide-avilability" class="text-uppercase">Social Media</label>
                             <ul>
-                                <li><a href="#"><i  class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                                <li><a href="#"><i  class="fa fa-facebook"></i></a> <input type="text" name="fb_link" value="{{$result->gl_fb->link}}"></li><br/>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a> <input type="text" name="tw_link" value="{{$result->gl_tw->link}}"></li><br/>
+                                <li><a href="#"><i class="fa fa-youtube"></i></a> <input type="text" name="yt_link" value="{{$result->gl_yt->link}}"></li><br/>
                             </ul>
                         </div>
                     </div>

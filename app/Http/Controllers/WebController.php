@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
+use App\GuideLinks;
 use Auth;
 
 class WebController extends Controller
@@ -125,6 +126,12 @@ class WebController extends Controller
         }
 
         $user->header = 'includes.agent-profile-header';
+        $user->gl_fb = GuideLinks::Where('user_id', $id)
+            ->Where('category','facebook')->first();
+        $user->gl_tw = GuideLinks::Where('user_id', $id)
+            ->Where('category','twitter')->first();
+        $user->gl_yt = GuideLinks::Where('user_id', $id)
+            ->Where('category','youtube')->first();
 
         return view('pages.agent-profile', ['result' => $user]);
     }
@@ -409,8 +416,27 @@ class WebController extends Controller
         $user['dob'] = $request->year.'-'.$request->month.'-'.$request->day;
         $user['profile_img'] = 'user_profile_'.$request->email.'.jpg';
         $user['background_img'] = 'user_background_'.$request->email.'.jpg';
+
         try{
             User::create($user);
+            $user_id = User::all()->last()->id;
+            if(isset($user_id) && $user_id != null){
+                $guide_links = new GuideLinks();
+                $guide_links->user_id = $user_id;
+                $guide_links->category = 'facebook';
+                $guide_links->link = '';
+                $guide_links->save();
+                $guide_links = new GuideLinks();
+                $guide_links->user_id = $user_id;
+                $guide_links->category = 'twitter';
+                $guide_links->link = '';
+                $guide_links->save();
+                $guide_links = new GuideLinks();
+                $guide_links->user_id = $user_id;
+                $guide_links->category = 'youtube';
+                $guide_links->link = '';
+                $guide_links->save();
+            }
         }catch (QueryException $e){
             $error .= "Something went wrong!!\r\n";
         }
@@ -548,6 +574,12 @@ class WebController extends Controller
             }
 
             $user->header = 'includes.guide-profile-header';
+            $user->gl_fb = GuideLinks::Where('user_id', $id)
+                ->Where('category','facebook')->first();
+            $user->gl_tw = GuideLinks::Where('user_id', $id)
+                ->Where('category','twitter')->first();
+            $user->gl_yt = GuideLinks::Where('user_id', $id)
+                ->Where('category','youtube')->first();
             return view('pages.guide-profile', ['result' => $user]);
         }else{
             return redirect('sign-in/guide');
@@ -663,9 +695,28 @@ class WebController extends Controller
                     $user->dob = $request->year.'-'.$request->month.'-'.$request->day;
                     $user->city = $request->city;
                     $user->country = $request->country;
+                    $id = Auth::id();
+                    $gl_fb = GuideLinks::Where('user_id', $id)
+                    ->Where('category','facebook')->first();
+                    if(isset($request->fb_link)){
+                        $gl_fb->link = $request->fb_link;
+                        $gl_fb->save();
+                    }
+                    $gl_tw = GuideLinks::Where('user_id', $id)
+                        ->Where('category','twitter')->first();
+                    if(isset($request->tw_link)){
+                        $gl_tw->link = $request->tw_link;
+                        $gl_tw->save();
+                    }
+                    $gl_yt = GuideLinks::Where('user_id', $id)
+                        ->Where('category','youtube')->first();
+                    if(isset($request->yt_link)){
+                        $gl_yt->link = $request->yt_link;
+                        $gl_yt->save();
+                    }
                     $user->save();
                 }
-                return redirect()->to('profile/edit/guide')->with('save-message', 'Information saved successfully!');
+                return redirect()->to('profile/edit/guide')->with(['save-message'=> 'Information saved successfully!']);
             }
 
             $pro_img = URL::asset('/uploads/'.$user->profile_img);
@@ -709,6 +760,12 @@ class WebController extends Controller
             }
 
             $user->header = 'includes.edit-guide-header';
+            $user->gl_fb = GuideLinks::Where('user_id', $id)
+                ->Where('category','facebook')->first();
+            $user->gl_tw = GuideLinks::Where('user_id', $id)
+                ->Where('category','twitter')->first();
+            $user->gl_yt = GuideLinks::Where('user_id', $id)
+                ->Where('category','youtube')->first();
             return view('pages.edit-guide-profile', ['result' => $user]);
         }else{
             return redirect('sign-in/guide');
