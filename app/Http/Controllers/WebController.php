@@ -381,6 +381,10 @@ class WebController extends Controller
         if($request->lname == ''){
             $error .= "Please provide last name!\r\n";
         }
+        $email = DB::table('users')->where('email', $request->email)->first();
+        if($email){
+            $error .= "Email already in use!\r\n";
+        }
         if($request->remail != $request->email){
             $error .= "Email didn't match!\r\n";
         }
