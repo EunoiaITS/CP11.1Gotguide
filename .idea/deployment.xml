@@ -5,7 +5,7 @@
       <paths name="accountmodule">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="gotguide" />
+            <mapping local="$PROJECT_DIR$" web="got" />
           </mappings>
         </serverdata>
       </paths>

@@ -11,6 +11,7 @@ use App\User;
 use App\Ratings;
 use App\AvailableDates;
 use App\packages;
+use App\VerifyUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
@@ -132,6 +133,10 @@ class WebController extends Controller
         if($request->remail != $request->email){
             $error .= "Email didn't match!\r\n";
         }
+        $email = DB::table('users')->where('email', $request->email)->first();
+        if($email){
+            $error .= "Email already in use!\r\n";
+        }
         if($request->repass != $request->password){
             $error .= "Password didn't match!\r\n";
         }
@@ -147,7 +152,7 @@ class WebController extends Controller
         $user['password'] = bcrypt($request->password);
         $user['language'] = $request->language;
         $user['role'] = 'traveller';
-        $user['payment_status'] = 'unpaid';
+        $user['payment_status'] = 'nv';
         $user['dob'] = $request->year.'-'.$request->month.'-'.$request->day;
         $user['profile_img'] = 'user_profile_'.$request->email.'.jpg';
         $user['background_img'] = 'user_background_'.$request->email.'.jpg';
@@ -817,6 +822,16 @@ class WebController extends Controller
     public function guide_logout(){
         if(Auth::logout());
         return redirect('sign-in/guide');
+    }
+
+    function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
 }
