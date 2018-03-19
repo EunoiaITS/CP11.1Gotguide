@@ -162,9 +162,9 @@ class ForgetPasswordController extends Controller
             $linkExtension = $this->generateRandomString();
             $link = url('/api/v1/forgot-password').'/'.$linkExtension;
         
-        $transport = (new \Swift_SmtpTransport('ssl://mail.gotguide.info', 465))
-                ->setUsername("forgetpassword@gotguide.info")
-                ->setPassword('fpgg@&17');
+            $transport = (new \Swift_SmtpTransport('ssl://mail.gotguide.info', 465))
+                    ->setUsername("forgetpassword@gotguide.info")
+                    ->setPassword('fpgg@&17');
 
             $mailer = new \Swift_Mailer($transport);
 

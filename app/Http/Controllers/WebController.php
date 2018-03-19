@@ -22,6 +22,7 @@ class WebController extends Controller
     public function home(){
         return view('landing-page.landing');
     }
+
     public function searchResult(Request $request){
         $result = User::where('role', 'agent')
             ->Where('payment_status', 'paid')
@@ -161,7 +162,70 @@ class WebController extends Controller
         if($error != null){
             return redirect()->back()->with('gs-message', $error);
         }
-        return redirect()->to('sign-in/user')->with('suc-message', "Registration successful! Please login!");
+
+        $linkExtension = $this->generateRandomString();
+        $link = url('/account/user/verify').'/'.$linkExtension;
+
+        $transport = (new \Swift_SmtpTransport('ssl://mail.gotguide.info', 465))
+            ->setUsername("support@gotguide.info")
+            ->setPassword('EmV](A]~bLtf');
+
+        $mailer = new \Swift_Mailer($transport);
+
+        $message = new \Swift_Message('Got Guide - Password Reset Link');
+        $message->setFrom(['support@gotguide.info' => 'Account verify link - Got Guide']);
+        $message->setTo([$request->email => $request->fname.' '.$request->lname]);
+        $message->setBody('<html><body>'.
+            '<h1>Hi '.$request->fname.' '.$request->lname.',</h1>'.
+            '<p style="font-size:18px;">Your account registration is complete. Please click the button/link below to verify your account.</p>'.
+            '<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td>
+                              <div>
+                                <!--[if mso]>
+                                  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://litmus.com" style="height:36px;v-text-anchor:middle;width:150px;" arcsize="5%" strokecolor="#EB7035" fillcolor="#EB7035">
+                                    <w:anchorlock/>
+                                    <center style="color:#ffffff;font-family:Helvetica, Arial,sans-serif;font-size:16px;">I am a button &rarr;</center>
+                                  </v:roundrect>
+                                <![endif]-->
+                                <a href="'.$link.'" style="background-color:#EB7035;border:1px solid #EB7035;border-radius:3px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:16px;line-height:44px;text-align:center;text-decoration:none;width:150px;-webkit-text-size-adjust:none;mso-hide:all;">Verify Account &rarr;</a>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>'.
+            '<br><br>Thank You<br>Got Guide<br>Customer Care Team</body></html>',
+            'text/html');
+
+        $result = $mailer->send($message);
+
+        $genLink = new VerifyUsers();
+
+        $genLink->email = $request->email;
+        $genLink->link = $linkExtension;
+
+        $genLink->save();
+
+        return redirect()
+            ->to('sign-in/user')
+            ->with('suc-message', "Registration successful! An email with verification link has been sent to your email! Please verify first to login!");
+    }
+
+    public function verifyUserAccount($link){
+        $linkCheck = VerifyUsers::where('link', $link)->get();
+        if($linkCheck->first()){
+            $userFind = User::where('email', $linkCheck[0]['email']);
+            $user = $userFind->first();
+            $user->payment_status = 'unpaid';
+            $user->save();
+            VerifyUsers::destroy($linkCheck[0]['id']);
+            return redirect()
+                ->to('sign-in/user')
+                ->with('suc-message', 'Your account is verified! Please login now!');
+        }else{
+            return redirect()
+                ->to('sign-in/user')
+                ->with('gs-message', 'Something went wrong!');
+        }
     }
 
     public function userLogin(Request $request){
@@ -170,6 +234,10 @@ class WebController extends Controller
         }
         $result = new \stdClass();
         if($request->isMethod('post')){
+            $user = User::where('email', $request->email)->first();
+            if($user && $user->payment_status == 'nv'){
+                return redirect()->back()->with('message', 'Please verify your account!!');
+            }
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'traveller'])){
                 return redirect('profile/user');
             }else{
@@ -295,6 +363,7 @@ class WebController extends Controller
             return redirect('sign-in/user');
         }
     }
+
     public function guideRegister(Request $request){
         $error = null;
         if($request->fname == ''){
@@ -323,7 +392,7 @@ class WebController extends Controller
         $user['country'] = $request->country;
         $user['language'] = $request->language;
         $user['role'] = 'agent';
-        $user['payment_status'] = 'unpaid';
+        $user['payment_status'] = 'nv';
         $user['dob'] = $request->year.'-'.$request->month.'-'.$request->day;
         $user['profile_img'] = 'user_profile_'.$request->email.'.jpg';
         $user['background_img'] = 'user_background_'.$request->email.'.jpg';
@@ -335,7 +404,69 @@ class WebController extends Controller
         if($error != null){
             return redirect()->back()->with('gs-message', $error);
         }
-        return redirect()->to('sign-in/guide')->with('suc-message', "Registration successful! Please login!");
+        $linkExtension = $this->generateRandomString();
+        $link = url('/account/guide/verify').'/'.$linkExtension;
+
+        $transport = (new \Swift_SmtpTransport('ssl://mail.gotguide.info', 465))
+            ->setUsername("support@gotguide.info")
+            ->setPassword('EmV](A]~bLtf');
+
+        $mailer = new \Swift_Mailer($transport);
+
+        $message = new \Swift_Message('Got Guide - Password Reset Link');
+        $message->setFrom(['support@gotguide.info' => 'Account verify link - Got Guide']);
+        $message->setTo([$request->email => $request->fname.' '.$request->lname]);
+        $message->setBody('<html><body>'.
+            '<h1>Hi '.$request->fname.' '.$request->lname.',</h1>'.
+            '<p style="font-size:18px;">Your account registration is complete. Please click the button/link below to verify your account.</p>'.
+            '<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                          <tr>
+                            <td>
+                              <div>
+                                <!--[if mso]>
+                                  <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://litmus.com" style="height:36px;v-text-anchor:middle;width:150px;" arcsize="5%" strokecolor="#EB7035" fillcolor="#EB7035">
+                                    <w:anchorlock/>
+                                    <center style="color:#ffffff;font-family:Helvetica, Arial,sans-serif;font-size:16px;">I am a button &rarr;</center>
+                                  </v:roundrect>
+                                <![endif]-->
+                                <a href="'.$link.'" style="background-color:#EB7035;border:1px solid #EB7035;border-radius:3px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:16px;line-height:44px;text-align:center;text-decoration:none;width:150px;-webkit-text-size-adjust:none;mso-hide:all;">Verify Account &rarr;</a>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>'.
+            '<br><br>Thank You<br>Got Guide<br>Customer Care Team</body></html>',
+            'text/html');
+
+        $result = $mailer->send($message);
+
+        $genLink = new VerifyUsers();
+
+        $genLink->email = $request->email;
+        $genLink->link = $linkExtension;
+
+        $genLink->save();
+
+        return redirect()
+            ->to('sign-in/guide')
+            ->with('suc-message', "Registration successful! An email with verification link has been sent to your email! Please verify first to login!");
+    }
+
+    public function verifyGuideAccount($link){
+        $linkCheck = VerifyUsers::where('link', $link)->get();
+        if($linkCheck->first()){
+            $userFind = User::where('email', $linkCheck[0]['email']);
+            $user = $userFind->first();
+            $user->payment_status = 'unpaid';
+            $user->save();
+            VerifyUsers::destroy($linkCheck[0]['id']);
+            return redirect()
+                ->to('sign-in/guide')
+                ->with('suc-message', 'Your account is verified! Please login now!');
+        }else{
+            return redirect()
+                ->to('sign-in/guide')
+                ->with('gs-message', 'Something went wrong!');
+        }
     }
 
     public function guideLogin(Request $request){
@@ -344,6 +475,10 @@ class WebController extends Controller
         }
         $result = new \stdClass();
         if($request->isMethod('post')){
+            $user = User::where('email', $request->email)->first();
+            if($user && $user->payment_status == 'nv'){
+                return redirect()->back()->with('message', 'Please verify your account!!');
+            }
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'agent'])){
                 return redirect('profile/guide');
             }else{
