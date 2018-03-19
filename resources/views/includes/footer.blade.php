@@ -120,7 +120,7 @@ Js script
      nice scroll
      ===================================--*/
 
-    $(".availabity-scroll").niceScroll({
+    $(".availabity-scroll, .ui-list-scroll").niceScroll({
         cursorcolor:"#e9e9e9",
         cursorwidth:"8px"
     });
