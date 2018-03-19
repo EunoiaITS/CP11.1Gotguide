@@ -26,7 +26,7 @@
                                         <li><i class="fa fa-cog" aria-hidden="true"></i>
                                             <ul>
                                                 <li><a href="{{ url('/profile/edit/guide') }}">Edit Profile</a></li>
-                                                <li><a href="{{ url('/glogout') }}">Log Out</a></li>
+                                                <li><a class="log-out-confermation" href="{{ url('/glogout') }}">Log Out</a></li>
                                             </ul>
                                         </li>
                                     </ul>

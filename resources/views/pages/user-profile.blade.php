@@ -11,7 +11,7 @@
                 <button class="btn btn-info search-guide-s open-popup-rateme">Search Guide</button>
                 <a href="{{ url('profile/edit/user/') }}" style="text-decoration: none;"><button type="button" class="btn btn-info log-out">Edit Profile</button></a>
                 <form method="post" action="{{ url('/ulogout') }}">
-                    <button type="submit" class="btn btn-btn-info log-out">Log out</button>
+                    <button type="submit" class="btn btn-btn-info log-out log-out-confermation">Log out</button>
                 </form>
             </div>
         </div>
@@ -63,6 +63,33 @@
 
     </div>
 </div>
+
+    <!--=======================
+    log out confirmation
+    ==========================-->
+         <div class="log-out-confermation-popup">
+            <div class="popup-base">
+                <div class="popup-rateme-main">
+                    <i class="close fa fa-remove"></i>
+                    <div class="row">
+                        <div class="rateme-destination">
+                            <h2 class="search-title">Confirmation Logout</h2>
+                        </div>
+                        <!-- header got seach area -->
+                        <div class="popup-got-search button-option-logout">
+                            <form action="#">
+                               <p class="text-center">Are you sure you want to logout ?</p>
+                               <div class="new-button clearfix">
+                                   <button class="btn btn-info btn-change">Ok</button>
+                                   <button class="btn btn-info btn-change close">Cancel</button>
+                               </div>
+                            </form>
+                        </div><!--// end header got search area -->
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- Popup -->
 <script type="text/javascript">
     function sortCity(){
         var sel = document.getElementById('city');

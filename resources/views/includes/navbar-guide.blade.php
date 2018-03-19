@@ -45,7 +45,7 @@
                         <li><a href="{{ url('/') }}">home</a></li>
                         <li><a href="{{ url('/') }}#about-us">about us</a></li>
                         <li><a href="{{ url('profile/guide') }}">Account</a></li>
-                        <li><a href="{{ url('/glogout') }}">Logout</a></li>
+                        <li><a class="log-out-confermation" href="{{ url('/glogout') }}">Logout</a></li>
                         <li><a href="{{ url('/') }}#contact-us">contact us</a></li>
                     </ul>
                 </nav>
