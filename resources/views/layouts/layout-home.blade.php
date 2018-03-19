@@ -1,10 +1,10 @@
 
 @include('includes.head')
 <?php
-
 $id = request()->route('id');
-$path = 'tour-guides/profile/'.$id;
-$search_path = 'search-result';?>
+$tpath = 'tour-guides/profile/'.$id;
+$search_path = 'search-result';
+?>
 
 <!--[if lt IE 8]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -15,25 +15,25 @@ $search_path = 'search-result';?>
     =====================-->
     <header class="header" id="header">
         <div class="header-overlay">
-        @if(!Auth::user())
-            @include('includes.navbar')
-            @else
-        @if(Auth::check())
-            @if(Auth::user()->role =="traveller")
-                @include('includes.navbar-user')
-            @elseif(Auth::user()->role =="agent")
-                @include('includes.navbar-guide')
-            @elseif(request()->path() === $search_path)
+		 @if(!Auth::user())
+		     @if(request()->path() == $search_path)
                 @include('includes.navbar-search')
-            @elseif(request()->path() === $path)
+             @elseif(request()->path() == $tpath)
                 @include('includes.navbar-search')
-            @else
-                @include('includes.navbar')
-            @endif
-        @endif
-@endif
-
-
+             @else
+                 @include('includes.navbar')
+             @endif
+         @else
+            @if(Auth::check())
+                    @if(Auth::user()->role =="traveller")
+						@include('includes.navbar-user')
+					@elseif(Auth::user()->role =="agent")
+						@include('includes.navbar-guide')
+					@else
+						@include('includes.navbar')
+					@endif
+			@endif
+		 @endif
             <!-- header landing area -->
             <div class="header-landing-area">
                 <div class="container">

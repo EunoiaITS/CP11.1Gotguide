@@ -40,11 +40,11 @@
             <div id="navigation-menu">
                 <nav class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="https://www.gotguide.co/#header">home</a></li>
-                        <li><a href="https://www.gotguide.co/#about-us">about us</a></li>
+                        <li><a href="#header">home</a></li>
+                        <li><a href="#about-us">about us</a></li>
                         <li><a href="{{ url('sign-in/user') }}">User</a></li>
                         <li><a href="{{ url('sign-in/guide') }}">Guide</a></li>
-                        <li><a href="https://www.gotguide.co/#contact-us">contact us</a></li>
+                        <li><a href="#contact-us">contact us</a></li>
                     </ul>
                 </nav>
             </div><!-- /. end menu area -->
