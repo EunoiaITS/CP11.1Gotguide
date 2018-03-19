@@ -211,7 +211,6 @@
       /*--=============
       shopping cart popup
       ===================--*/
-
       $(".shopping-cart-popup").on("click",function(){
           $(".popup-shopping-card").fadeIn();
           return false;

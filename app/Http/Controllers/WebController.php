@@ -15,15 +15,21 @@ use App\VerifyUsers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\View;
 use Auth;
 
 class WebController extends Controller
 {
-    public function home(){
+    public function __construct()
+    {
         $languages = Languages::all();
         $cities = Cities::all();
         $countries = Countries::all();
-        return view('landing-page.landing',['languages'=>$languages,'cities'=>$cities,'countries'=>$countries]);
+        View::share(['languages'=> $languages,'cities'=>$cities,'countries'=>$countries]);
+    }
+
+    public function home(){
+        return view('landing-page.landing');
     }
     public function searchResult(Request $request){
         $result = User::where('role', 'agent')
@@ -340,7 +346,6 @@ class WebController extends Controller
         }
         return redirect()->to('sign-in/guide')->with('suc-message', "Registration successful! Please login!");
     }
-
     public function guideLogin(Request $request){
         if(Auth::user()){
             return redirect()->to('profile/guide');
