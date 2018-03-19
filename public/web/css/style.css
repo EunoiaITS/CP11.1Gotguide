@@ -950,7 +950,7 @@ User edit profle page
 }
 .user-social-media li a i{
     color: #fff;
-    font-style: 17px;
+    font-size: 17px;
     padding-right: 5px;
      transition: all .2s linear 0s;
 }
@@ -2058,7 +2058,7 @@ Responsive area
         font-size: 13px;
     }
     .btn.btn-info.u_login{
-        font-size: 17px !imporant;
+        font-size: 17px !important;
     }
     .user-birth-date .bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
         width: 100%;
