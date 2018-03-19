@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/gotapi.iml" filepath="$PROJECT_DIR$/.idea/gotapi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/got.iml" filepath="$PROJECT_DIR$/.idea/got.iml" />
     </modules>
   </component>
 </project>

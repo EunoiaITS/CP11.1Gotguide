@@ -334,6 +334,7 @@ class ComposerStaticInit83be94a52397459354b01a14dc104318
         'CreatePackagesTable' => __DIR__ . '/../..' . '/database/migrations/sdawfawgwa/2016_11_09_145744_create_packages_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/sdawfawgwa/2014_10_12_100000_create_password_resets_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/sdawfawgwa/2014_10_12_000000_create_users_table.php',
+        'CreateVerifyUserTable' => __DIR__ . '/../..' . '/database/migrations/2018_03_18_131645_CreateVerifyUserTable.php',
         'DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/DatabaseSeeder.php',
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',

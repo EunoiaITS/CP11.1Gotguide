@@ -15,6 +15,7 @@ return array(
     'CreatePackagesTable' => $baseDir . '/database/migrations/sdawfawgwa/2016_11_09_145744_create_packages_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/sdawfawgwa/2014_10_12_100000_create_password_resets_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/sdawfawgwa/2014_10_12_000000_create_users_table.php',
+    'CreateVerifyUserTable' => $baseDir . '/database/migrations/2018_03_18_131645_CreateVerifyUserTable.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
