@@ -1,7 +1,7 @@
 
 /*=========
  Theme name: got guide;
- Author:unoia it solution
+ Author:eunoia it solution
 
  * custom style
  * header area
@@ -674,10 +674,9 @@ Reset password link
     font-weight: 300;
 }
 .p-text-link{
-    margin: 10% auto !important;
+    margin: 10% auto;
     color: #101010;
     font-weight: 400;
-    display:block;
 }
 .reset-password-border{
     border-radius: 10px 10px 0px 0px;
@@ -892,7 +891,7 @@ User edit profle page
 }
 .user-edit-picture img {
     width: 100%;
-    height:180px;
+    height: 100%;
     border-radius: 50%;
 }
 .image-hover{
@@ -1191,6 +1190,11 @@ textarea.guite-textarea{
     height: 180px;
     display: block;
 }
+.ui-list-scroll{
+    overflow-y: scroll;
+    height: 280px;
+    display: block;
+}
 .form-group .fa-plus{
     font-size: 16px;
     border: 1px solid #f1494b;
@@ -1284,7 +1288,8 @@ Search popup
 .popup-about,
 .popup-image-wrapper,
 .popup-reset-open,
-.delete-popup-package{
+.popup-shopping-card,
+.log-out-confermation-popup{
     height: 100%;
     width: 100%;
     z-index: 1000000;
@@ -1292,6 +1297,7 @@ Search popup
     position: fixed;
     left: 0;
     top: 0;
+    background: rgba(255,255,255,.4)
 }
 .popup-wrapper:before,
 .popup-rateme:before,
@@ -1303,7 +1309,8 @@ Search popup
 .popup-about:before
 .popup-image-wrapper:before,
 .popup-reset-open:before,
-.delete-popup-package:before{
+.popup-shopping-card:before,
+.log-out-confermation-popup:before{
     content: "";
     height: 100%;
     width: 100%;
@@ -1397,8 +1404,7 @@ Search popup
 .edit-popup-package:before,
 .popup-about:before,
 .popup-image-wrapper:before,
-.popup-reset-open:before,
-.delete-popup-package:before{
+.popup-reset-open:before{
     background:#fff;
     content: "";
     height: 100%;
@@ -1496,7 +1502,7 @@ Search popup
     search result page
 ========================--*/
 
-.search-result-skill{
+ .search-result-skill{
     background: #f4f4f4;
     display: block;
 }
@@ -1720,6 +1726,73 @@ Comments page
 .jq-shadow {
   -webkit-filter: drop-shadow( -2px -2px 2px #888 );
   filter: drop-shadow( -2px -2px 2px #888 );
+}
+
+/*--
+subscription popup page
+============================--*/
+.subcription-list{
+    margin: 26px auto;
+    display: block;
+    width:80%;
+
+}
+.subcription-list li {
+    float: none;
+    width: 100%;
+    border-bottom: 1px solid #e0e0e0;
+    overflow: hidden;
+     font-size: 13px;
+     font-weight: 400;
+    padding: 16px 0px;
+}
+.left-offer-item{
+    float: left;
+    width: 90%;
+    text-align: left;
+}
+.selection{
+    float: left;
+    width: 10%;
+    text-align: right;
+    padding-right: 20px;
+}
+.offer-title{
+    display: inline-block;
+    background: #f14a44;
+    color: #fff;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+.offer-list-item{
+    display: block;
+    padding: 2px 0px;
+}
+.price-item .bold-text{
+    font-weight: 700;
+}
+
+.new-button.clearfix{
+    width: 50%;
+    margin:0 auto;
+}
+.button-option-logout .btn.btn-info.btn-change{
+    display: block;
+    float: left;
+    width: 110px;
+    height: 50px;
+}
+.button-option-logout .btn.btn-change.close {
+    width: 110px !important;
+    float: right;
+    height: 50px !important;
+    margin-right: 20px !important;
+    border-radius: 5px;
+    position: static;
+    color: #fff;
+    text-shadow: none;
+    font-weight: normal;
 }
 
 /* ==========================================================================
@@ -2080,6 +2153,9 @@ Responsive area
         width: 155px;
         height: 47px;
         font-size: 15px;
+    }
+    .subcription-list{
+        width: 100%;
     }
     
 }
