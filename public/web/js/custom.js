@@ -83,9 +83,9 @@
     ==================================*/
     setInterval(function () {
         var widnowHeight = $(window).height();
-        var introHeight = $(".header-landing-text").height();
+        var introHeight = $(".header-landing-text, .reset-email-new").height();
         var paddingTop = widnowHeight - introHeight;
-        $(".header-landing-text").css({
+        $(".header-landing-text, .reset-email-new").css({
             'padding-top': Math.round(paddingTop / 2) + 'px',
             'padding-bottom': Math.round(paddingTop / 2) + 'px'
         });
@@ -207,18 +207,27 @@
       $(".close").on("click",function(){
           $(".edit-popup-package").fadeOut();
       });
-
-    /*===================
-     delete available popup
-     ===================*/
-
-    $(".delete-package").on("click",function(){
-        $(".delete-popup-package").fadeIn();
-        return false;
-    });
-    $(".close").on("click",function(){
-        $(".delete-popup-package").fadeOut();
-    });
+   
+      /*--=============
+      shoping cart popup
+      ===================--*/
+      $(".shopping-cart-popup").on("click",function(){
+          $(".popup-shopping-card").fadeIn();
+          return false;
+      });
+      $(".close").on("click",function(){
+          $(".popup-shopping-card").fadeOut();
+      });
+      /*--=============
+      log-out-confermation
+      ===================--*/
+      $(".log-out-confermation").on("click",function(){
+          $(".log-out-confermation-popup").fadeIn();
+          return false;
+      });
+      $(".close").on("click",function(){
+          $(".log-out-confermation-popup").fadeOut();
+      });
 
 
 
