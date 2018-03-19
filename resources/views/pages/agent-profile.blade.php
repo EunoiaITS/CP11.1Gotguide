@@ -189,14 +189,15 @@ rate me popupbox
                             <span class="tiltle-popup-name">Title <span class="fright">:</span></span>
                             <span class="tiltle-popup-description" id="package_name_show">Text text text</span>
                         </div>
+                        <div class="clearfix"></div>
                         <div class="popup-title">
                             <span class="tiltle-popup-name">Price <span class="fright">:</span></span>
                             <span class="tiltle-popup-description" id="package_price_show">RM 250</span>
                         </div>
+                        <div class="clearfix"></div>
                         <div class="popup-title">
                             <span class="tiltle-popup-name">Description <span class="fright">:</span></span>
-                                    <span class="tiltle-popup-description">
-                                        <p id="package_details_show">In publishing and graphic design, lorem ipsum is a filler text or greeking commonly used to demonstrate the textual elements of a graphic document or visual presentation. Replacing meaningful content with placeholder text allows designers to design the form of the content before the content itself has been produced.</p>
+                            <span class="tiltle-popup-description" id="package_details_show">In publishing and graphic design, lorem ipsum is a filler text or greeking commonly used to demonstrate the textual elements of a graphic document or visual presentation. Replacing meaningful content with placeholder text allows designers to design the form of the content before the content itself has been produced.
                                     </span>
                         </div>
                         <button type="button" class="btn btn-info btn-change close">Cancel</button>

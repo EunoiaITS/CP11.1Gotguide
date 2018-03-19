@@ -1846,27 +1846,27 @@
                                 <option value="Canada" data-tokens="Canada">Canada</option>
                                 <option value="Central African Republic" data-tokens="Central African Republic">Central African Republic</option>
                                 <option value="Chad" data-tokens="Chad">Chad</option>
-                                <option value="Chile"data-tokens="Chile">Chile</option>
-                                <option value="China"data-tokens="China">China</option>
-                                <option value="Colombia"data-tokens="Colombia">Colombia</option>
-                                <option value="Comoros"data-tokens="Comoros">Comoros</option>
-                                <option value="Democratic Republic of the Congo"data-tokens="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
-                                <option value="Republic of the Congo"data-tokens="Republic of the Congo">Republic of the Congo</option>
+                                <option value="Chile" data-tokens="Chile">Chile</option>
+                                <option value="China" data-tokens="China">China</option>
+                                <option value="Colombia" data-tokens="Colombia">Colombia</option>
+                                <option value="Comoros" data-tokens="Comoros">Comoros</option>
+                                <option value="Democratic Republic of the Congo" data-tokens="Democratic Republic of the Congo">Democratic Republic of the Congo</option>
+                                <option value="Republic of the Congo" data-tokens="Republic of the Congo">Republic of the Congo</option>
                                 <option value="Costa Rica" data-tokens="Costa Rica">Costa Rica</option>
-                                <option value="Croatia"data-tokens="Croatia">Croatia</option>
-                                <option value="Cuba"data-tokens="Cuba">Cuba</option>
-                                <option value="Cyprus"data-tokens="Cyprus">Cyprus</option>
-                                <option value="Czech Republic"data-tokens="Czech Republic">Czech Republic</option>
-                                <option value="Denmark"data-tokens="Denmark">Denmark</option>
-                                <option value="Djibouti"data-tokens="Djibouti">Djibouti</option>
-                                <option value="Dominica"data-tokens="Dominica">Dominica</option>
+                                <option value="Croatia" data-tokens="Croatia">Croatia</option>
+                                <option value="Cuba" data-tokens="Cuba">Cuba</option>
+                                <option value="Cyprus" data-tokens="Cyprus">Cyprus</option>
+                                <option value="Czech Republic" data-tokens="Czech Republic">Czech Republic</option>
+                                <option value="Denmark" data-tokens="Denmark">Denmark</option>
+                                <option value="Djibouti" data-tokens="Djibouti">Djibouti</option>
+                                <option value="Dominica" data-tokens="Dominica">Dominica</option>
                                 <option value="Dominican Republic" data-tokens="Dominican Republic">Dominican Republic</option>
-                                <option value="Ecuador"data-tokens="Ecuador">Ecuador</option>
-                                <option value="Egypt"data-tokens="Egypt">Egypt</option>
-                                <option value="El Salvador"data-tokens="El Salvador">El Salvador</option>
-                                <option value="Equatorial Guinea"data-tokens="Equatorial Guinea">Equatorial Guinea</option>
-                                <option value="Eritrea"data-tokens="Eritrea">Eritrea</option>
-                                <option value="Estonia"data-tokens="Estonia">Estonia</option>
+                                <option value="Ecuador" data-tokens="Ecuador">Ecuador</option>
+                                <option value="Egypt" data-tokens="Egypt">Egypt</option>
+                                <option value="El Salvador" data-tokens="El Salvador">El Salvador</option>
+                                <option value="Equatorial Guinea" data-tokens="Equatorial Guinea">Equatorial Guinea</option>
+                                <option value="Eritrea" data-tokens="Eritrea">Eritrea</option>
+                                <option value="Estonia" data-tokens="Estonia">Estonia</option>
                                 <option value="Ethiopia" data-tokens="Ethiopia">Ethiopia</option>
                                 <option value="Fiji" data-tokens="Fiji">Fiji</option>
                                 <option value="Finland" data-tokens="Finland">Finland</option>
@@ -2011,7 +2011,7 @@
                             </select>
                         </div>
                         <div class="language from-left">
-                            <select id="language" class="selectpicker u-upparcase" data-live-search="true" title="Language" name="language" required>
+                            <select id="language" class="selectpicker u-upparcase" data-live-search="true" title="Language" name="language">
                                 <option value="BENGALI" data-tokens="BENGALI">BENGALI</option>
                                 <option value="ENGLISH" data-tokens="ENGLISH">ENGLISH</option>
                                 <option value="ARABIC" data-tokens="ARABIC">ARABIC</option>
