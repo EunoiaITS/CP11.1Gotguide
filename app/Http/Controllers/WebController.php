@@ -19,7 +19,10 @@ use Auth;
 class WebController extends Controller
 {
     public function home(){
-        return view('landing-page.landing');
+        $languages = Languages::all();
+        $cities = Cities::all();
+        $countries = Countries::all();
+        return view('landing-page.landing',['languages'=>$languages,'cities'=>$cities,'countries'=>$countries]);
     }
     public function searchResult(Request $request){
         $result = User::where('role', 'agent')
