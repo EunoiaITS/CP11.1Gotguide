@@ -207,11 +207,21 @@
       $(".close").on("click",function(){
           $(".edit-popup-package").fadeOut();
       });
+
+      /*--===========
+      Delete popup package
+      =====================--*/
+       $(".delete-package").on("click",function(){
+          $(".delete-popup-package").fadeIn();
+          return false;
+      });
+      $(".close").on("click",function(){
+          $(".delete-popup-package").fadeOut();
+      });
    
       /*--=============
-      shopping cart popup
+      shoping cart popup
       ===================--*/
-
       $(".shopping-cart-popup").on("click",function(){
           $(".popup-shopping-card").fadeIn();
           return false;
