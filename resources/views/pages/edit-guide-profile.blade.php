@@ -346,5 +346,61 @@
 
         </div>
     </div><!-- Popup -->
+    
+    <!-- 
+        shoping cart popup
+        ======================-->
+        <div class="popup-shopping-card">
+            <div class="popup-base">
+                <div class="search-popup">
+                    <i class="close fa fa-remove"></i>
+                    <div class="row">
+                        <!-- header got seach area -->
+                        <div class="popup-got-search search-destination">
+                            <h2 class="search-title">Subscription</h2>
+                            <p>Congratulations, You are currently subscribed !</p>
+                            <div class="ui-list-scroll">
+                                <ul class="subcription-list">
+                                <li>
+                                    <div class="left-offer-item">
+                                        <span class="offer-title">Offer</span>
+                                        <span class="offer-list-item">Subscription A</span>
+                                        <div class="price-item">Price: <span class="bold-text">USD 5.99</span> | Validity: <span class="bold-text">365 Days</span></div>
+                                    </div>
+                                    <div class="selection">
+                                        <input type="radio" name="optradio">
+                                    </div>
+                                </li>
+                                 <li>
+                                    <div class="left-offer-item">
+                                        <span class="offer-title">Offer</span>
+                                        <span class="offer-list-item">Subscription B</span>
+                                        <div class="price-item">Price:  <strike>USD 2.99</strike> <span class="bold-text"> USD 1.99</span> | Validity: <span class="bold-text">180 Days</span></div>
+                                    </div>
+                                    <div class="selection">
+                                       <input type="radio" name="optradio">
+                                    </div>
+                                </li>
+                                 <li>
+                                    <div class="left-offer-item">
+                                        <span class="offer-title">Offer</span>
+                                        <span class="offer-list-item">Trial</span>
+                                        <div class="price-item">Price: <span class="bold-text">USD 1.00</span> | Validity: <span class="bold-text">7 Days</span></div>
+                                    </div>
+                                    <div class="selection">
+                                        <input type="radio" name="optradio">
+                                    </div>
+                                </li>
+                            </ul>
+                            </div>
+                           <div class="pay-button clearfix">
+                                <button class="btn btn-info btn-change">Pay</button>
+                           </div>
+                        </div><!--// end header got search area -->
+                    </div>
+                </div>
+
+            </div>
+        </div><!-- Popup -->
 
     @endsection
