@@ -147,4 +147,9 @@ $search_path = 'search-result';
     </script>
 @yield('content')
 @include('includes.search-modal')
+    @if(Auth::check())
+        @if(Auth::user()->role =="agent")
+            @include('includes.sub-cart')
+        @endif
+    @endif
 @include('includes.footer')

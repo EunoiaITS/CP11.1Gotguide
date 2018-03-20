@@ -47,6 +47,7 @@ Route::get('forget-password/success', 'ForgetPasswordController@webForgetPasswor
 Route::get('reset-password/success', 'ForgetPasswordController@webResetPasswordSuccess');
 Route::get('account/user/verify/{link}', 'WebController@verifyUserAccount');
 Route::get('account/guide/verify/{link}', 'WebController@verifyGuideAccount');
+Route::post('subscription/buy', 'WebController@buySubscription');
 
 
 Route::group(['middleware' => 'cors', 'prefix' => 'api/v1'], function(){
