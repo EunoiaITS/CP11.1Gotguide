@@ -148,6 +148,7 @@ $search_path = 'search-result';
 @yield('content')
 @include('includes.search-modal')
     @if(Auth::check())
+        @include('includes.logout-confirm')
         @if(Auth::user()->role =="agent")
             @include('includes.sub-cart')
         @endif

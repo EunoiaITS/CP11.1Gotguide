@@ -523,6 +523,14 @@ class WebController extends Controller
                 return redirect()->back()->with('message', 'Please verify your account!!');
             }
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'agent'])){
+                $userPayment = UserPayments::where('user_id', Auth::id())->first();
+                if($userPayment){
+                    if(date('Y-m-d') > $userPayment->payment_expiry){
+                        UserPayments::destroy($userPayment->id);
+                        User::where('id', Auth::id())
+                            ->update(['payment_status' => 'unpaid']);
+                    }
+                }
                 return redirect('profile/guide');
             }else{
                 return redirect()->back()->with('message', 'Wrong username/password!!');
