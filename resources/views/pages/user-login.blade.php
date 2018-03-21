@@ -110,7 +110,7 @@
                                                         @endfor
                                                 </select>
                                                 <select name="year" class="selectpicker u-cap" id="date_of_birth" title="Year" data-width="30%" required="true">
-                                                    @for($i = 1917; $i <= date('Y'); $i++)
+                                                    @for($i = 1930; $i <= date('Y'); $i++)
                                                         <option value="{{ $i }}">{{ $i }}</option>
                                                     @endfor
                                                 </select>
