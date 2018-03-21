@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\UserPayments;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', function ($view) {
+            $myOffer = '';
+            if(auth()->check()){
+                if(auth()->user()->role == 'agent'){
+                    $myOffer = UserPayments::where('user_id', auth()->user()->id)->first();
+                }
+            }
+            $view->with('myOffer', $myOffer);
+        });
     }
 
     /**

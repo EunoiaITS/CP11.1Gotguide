@@ -12,6 +12,8 @@ use App\Ratings;
 use App\AvailableDates;
 use App\packages;
 use App\VerifyUsers;
+use App\PaymentConfig;
+use App\UserPayments;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\URL;
@@ -21,12 +23,14 @@ use Auth;
 
 class WebController extends Controller
 {
+
     public function __construct()
     {
         $languages = Languages::all();
         $cities = Cities::all();
         $countries = Countries::all();
-        View::share(['languages'=> $languages,'cities'=>$cities,'countries'=>$countries]);
+        $offers = PaymentConfig::all();
+        View::share(['offers'=> $offers, 'languages'=> $languages,'cities'=>$cities,'countries'=>$countries]);
     }
 
     public function home(){
@@ -507,6 +511,7 @@ class WebController extends Controller
                 ->with('gs-message', 'Something went wrong!');
         }
     }
+
     public function guideLogin(Request $request){
         if(Auth::user()){
             return redirect()->to('profile/guide');
@@ -518,6 +523,14 @@ class WebController extends Controller
                 return redirect()->back()->with('message', 'Please verify your account!!');
             }
             if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'agent'])){
+                $userPayment = UserPayments::where('user_id', Auth::id())->first();
+                if($userPayment){
+                    if(date('Y-m-d') > $userPayment->payment_expiry){
+                        UserPayments::destroy($userPayment->id);
+                        User::where('id', Auth::id())
+                            ->update(['payment_status' => 'unpaid']);
+                    }
+                }
                 return redirect('profile/guide');
             }else{
                 return redirect()->back()->with('message', 'Wrong username/password!!');
@@ -1016,10 +1029,46 @@ class WebController extends Controller
         }
     }
 
+    public function buySubscription(Request $request){
+        if($request->isMethod('post')){
+            if(Auth::user()){
+                $id = Auth::id();
+                $user = User::find($id);
+                if($user->role != 'agent'){
+                    return redirect()->back();
+                }
+                $userOffer = UserPayments::where('user_id', $id)->first();
+                if($userOffer){
+                    return redirect()
+                        ->back()
+                        ->with('message', 'You already have subscribed!');
+                }else{
+                    $offer = PaymentConfig::find($request->optradio);
+                    $payment = array();
+                    $payment['user_id'] = $id;
+                    $payment['offer_id'] = $request->optradio;
+                    $payment['payment_id'] = $this->generateRandomString();
+                    $payment['amount'] = 0;
+                    $payment['payment_type'] = 1;
+                    $payment['payment_time'] = date('Y-m-d H:i:s');
+                    $payment['payment_status'] = 'paid';
+                    $payment['payment_expiry'] = date('Y-m-d', strtotime('+'.$offer->duration.' days'));
+                    UserPayments::create($payment);
+                    User::where('id', $id)
+                        ->update(['payment_status' => 'paid']);
+                    return redirect()
+                        ->back()
+                        ->with('gs-message', 'You have subscribed successfully!');
+                }
+            }
+        }
+    }
+
     public function user_logout(){
         if(Auth::logout());
         return redirect('sign-in/user');
     }
+
     public function guide_logout(){
         if(Auth::logout());
         return redirect('sign-in/guide');

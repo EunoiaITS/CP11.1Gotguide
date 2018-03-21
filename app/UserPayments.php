@@ -9,6 +9,7 @@ class UserPayments extends Model
     protected $table = 'user_payments';
     protected $fillable = [
         'user_id',
+        'offer_id',
         'payment_id',
         'amount',
         'payment_type',
