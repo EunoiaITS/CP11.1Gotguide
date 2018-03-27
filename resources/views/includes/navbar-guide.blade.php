@@ -7,7 +7,7 @@
                 <div class="col-sm-offset-8 col-md-offset-8 col-lg-offset-8 col-sm-4 col-md-4 col-lg-4 col-xs-12 padding-right-0">
                     <div class="social-media">
                         <ul>
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://www.facebook.com/gotguidetrave"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#" class="shopping-cart-popup"><i class="fa fa-shopping-cart"></i></a></li>
                         </ul>
                     </div>

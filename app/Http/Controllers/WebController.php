@@ -351,7 +351,7 @@ class WebController extends Controller
                     $user->contact = $request->contact;
                     $user->save();
                 }
-                return redirect()->to('profile/edit/user')->with('save-message', 'Information saved successfully!');
+                return redirect()->to('profile/user')->with('save-message', 'Information saved successfully!');
             }
 
             $pro_img = URL::asset('/uploads/'.$user->profile_img);
@@ -658,6 +658,12 @@ class WebController extends Controller
             }
 
             $user->header = 'includes.guide-profile-header';
+            $user->gl_fb = GuideLinks::Where('user_id', $id)
+                ->Where('category','facebook')->first();
+            $user->gl_tw = GuideLinks::Where('user_id', $id)
+                ->Where('category','twitter')->first();
+            $user->gl_yt = GuideLinks::Where('user_id', $id)
+                ->Where('category','youtube')->first();
             return view('pages.check-reviews', ['result' => $user]);
         }else{
             return redirect('sign-in/guide');
@@ -729,7 +735,7 @@ class WebController extends Controller
                     }
                     $user->save();
                 }
-                return redirect()->to('profile/edit/guide')->with(['save-message'=> 'Information saved successfully!']);
+                return redirect()->to('profile/guide')->with(['save-message'=> 'Information saved successfully!']);
             }
 
             $pro_img = URL::asset('/uploads/'.$user->profile_img);
@@ -888,6 +894,12 @@ class WebController extends Controller
         }
 
         $user->header = 'includes.agent-profile-header';
+        $user->gl_fb = GuideLinks::Where('user_id', $id)
+            ->Where('category','facebook')->first();
+        $user->gl_tw = GuideLinks::Where('user_id', $id)
+            ->Where('category','twitter')->first();
+        $user->gl_yt = GuideLinks::Where('user_id', $id)
+            ->Where('category','youtube')->first();
         return view('pages.check-guide-reviews', ['result' => $user]);
     }
 

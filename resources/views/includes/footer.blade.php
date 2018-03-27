@@ -5,10 +5,10 @@ Footer area
     <div class="container">
         <div class="row">
             <div class="col-sm-offset-0 col-md-offset-1 col-lg-offset-1 col-sm-6 col-md-5 col-lg-5 col-xs-12">
-                <p class="footer-text"> © 2017 - <a href="#">Got Guide</a> All Right Reserved</p>
+                <p class="footer-text"> © 2017 - <a href="{{ url('/') }}">Got Guide</a> All Right Reserved</p>
             </div>
             <div class="col-sm-6 col-md-5 col-lg-5 col-xs-12">
-                <p class="powerd-by"> Powered By <a href="#">Eunoia I.T Solutions</a></p>
+                <p class="powerd-by"> Powered By <a href="https://eunoiaits.com">Eunoia I.T Solutions</a></p>
             </div>
         </div>
     </div>
