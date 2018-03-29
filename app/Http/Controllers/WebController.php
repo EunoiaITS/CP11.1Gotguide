@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use App\GuideLinks;
 use Auth;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
 
 class WebController extends Controller
 {
@@ -38,45 +40,53 @@ class WebController extends Controller
     }
 
     public function searchResult(Request $request){
+        $rules = array(
+            'fields' => 'required_without_all:city,country,language',
+        );
+        $message = array(
+            'required_without_all' => 'Any of the following fields is Mandatory to perform a search !!! ');
+
+        $validator = Validator::make(Input::all(), $rules,$message)->validate();
+
         $result = User::where('role', 'agent')
             ->Where('payment_status', 'paid')
             ->Where('country', 'like', '%'.trim($request->country).'%')
             ->Where('city', 'like', '%'.trim($request->city).'%')
             ->Where('language', 'like', '%'.trim($request->language).'%')
             ->get();
-        if(!$result->first()){
-            $result->error = "Your Desired Search Result Not Found !!";
-            $result->header = "includes.error-header";
-            return view('pages.error', ['result' => $result]);
-        }else{
-            $finalResult = new \stdClass();
-            foreach($result as $key => $userData){
-                $count = $totalRating = null;
-                $age = date_diff(date_create($userData->dob), date_create('today'))->y;
-                $result->age = $age;
-                $allRatingComment = Ratings::where('agent_id', $userData->id)->get();
-                foreach($allRatingComment as $ratingComment){
-                    if($ratingComment->comment != null){
-                        $totalRating += $ratingComment->rating;
-                        $count++;
+            if (!$result->first()) {
+                $result->error = "Your Desired Search Result Not Found !!";
+                $result->header = "includes.error-header";
+                return view('pages.error', ['result' => $result]);
+            } else {
+                $finalResult = new \stdClass();
+                foreach ($result as $key => $userData) {
+                    $count = $totalRating = null;
+                    $age = date_diff(date_create($userData->dob), date_create('today'))->y;
+                    $result->age = $age;
+                    $allRatingComment = Ratings::where('agent_id', $userData->id)->get();
+                    foreach ($allRatingComment as $ratingComment) {
+                        if ($ratingComment->comment != null) {
+                            $totalRating += $ratingComment->rating;
+                            $count++;
+                        }
                     }
-                }
-                if($count != null){
-                    $result->total_comments = $count;
-                }else{
-                    $result->total_comments = 'No comments yet!';
-                }
-                if($totalRating != null){
-                    $result->total_rating = $totalRating/$count;
-                }else{
-                    $result->total_rating = 'No ratings yet!';
-                }
+                    if ($count != null) {
+                        $result->total_comments = $count;
+                    } else {
+                        $result->total_comments = 'No comments yet!';
+                    }
+                    if ($totalRating != null) {
+                        $result->total_rating = $totalRating / $count;
+                    } else {
+                        $result->total_rating = 'No ratings yet!';
+                    }
 
+                }
+                $finalResult->header = 'includes.search-result-header';
+                $finalResult->users = $result;
+                return view('pages.search-result', ['result' => $finalResult,'errors'=> $validator]);
             }
-            $finalResult->header = 'includes.search-result-header';
-            $finalResult->users = $result;
-            return view('pages.search-result', ['result' => $finalResult]);
-        }
     }
 
     public function showAgentProfile($id){

@@ -40,6 +40,9 @@ $search_path = 'search-result';
                     <div class="row">
                         <div class="header-landing-text text-center">
                             <h2>WELCOME TO GOT GUIDE</h2>
+                            @foreach($errors->all() as $error)
+                                <p style="color:#fff;"><b>{{$error}}</b></p>
+                            @endforeach
                             <!-- header got search area -->
                             <div class="header-got-search">
                                 <form method="post" action="{{ url('/search-result') }}">
