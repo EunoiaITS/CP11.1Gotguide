@@ -6,6 +6,9 @@
                 <div class="search-destination">
                     <h2 class="search-title">Choose Destination</h2>
                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.</p>
+                    @foreach($errors->all() as $error)
+                        <p class="alert-danger"><b>{{$error}}</b></p>
+                    @endforeach
                 </div>
                 <!-- header got seach area -->
                 <div class="popup-got-search">
@@ -26,7 +29,7 @@
                             </select>
                         </div>
                         <div class="language from-left">
-                            <select id="s-language" class="selectpicker u-upparcase" data-live-search="true" title="Language" name="language" required>
+                            <select id="s-language" class="selectpicker u-upparcase" data-live-search="true" title="Language" name="language">
                                 @foreach($languages as $lang)
                                     <option value="{{ $lang->lang_name }}" data-tokens="{{ $lang->lang_name }}">{{ $lang->lang_name }}</option>
                                 @endforeach
