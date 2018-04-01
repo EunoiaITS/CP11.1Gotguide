@@ -38,17 +38,22 @@ Contact us area
                 <h3>contact us</h3>
                 <p>Please fill in the form below for any enquiries.</p>
             </div>
+            @if(session()->has('success-message'))
+                <div class="alert alert-success">
+                    {{ session()->get('success-message') }}
+                </div>
+            @endif
             <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-7 col-md-7 col-lg-7 col-xs-12">
                 <div class="contact-from">
-                    <form action="#">
+                    <form action="{{ url('contact/form') }}" method="post">
                         <div class="from-group">
-                            <input type="text" placeholder="Your Name" class="form-control" required>
+                            <input type="text" name="name" placeholder="Your Name" class="form-control" required>
                         </div>
                         <div class="from-group">
-                            <input type="email" placeholder="Your Mail" class="form-control" required>
+                            <input type="email" name="email" placeholder="Your Mail" class="form-control" required>
                         </div>
                         <div class="from-group">
-                            <textarea name="" id="" class="form-control" placeholder="Your message" cols="30" rows="9"></textarea>
+                            <textarea name="message" id="" class="form-control" placeholder="Your message" cols="30" rows="9"></textarea>
                         </div>
                         <button class="btn btn-info send-sms pull-right">send Message</button>
                     </form>

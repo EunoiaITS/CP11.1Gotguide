@@ -22,6 +22,7 @@ use App\GuideLinks;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 
 class WebController extends Controller
 {
@@ -54,39 +55,39 @@ class WebController extends Controller
             ->Where('city', 'like', '%'.trim($request->city).'%')
             ->Where('language', 'like', '%'.trim($request->language).'%')
             ->get();
-            if (!$result->first()) {
-                $result->error = "Your Desired Search Result Not Found !!";
-                $result->header = "includes.error-header";
-                return view('pages.error', ['result' => $result]);
-            } else {
-                $finalResult = new \stdClass();
-                foreach ($result as $key => $userData) {
-                    $count = $totalRating = null;
-                    $age = date_diff(date_create($userData->dob), date_create('today'))->y;
-                    $result->age = $age;
-                    $allRatingComment = Ratings::where('agent_id', $userData->id)->get();
-                    foreach ($allRatingComment as $ratingComment) {
-                        if ($ratingComment->comment != null) {
-                            $totalRating += $ratingComment->rating;
-                            $count++;
-                        }
+        if (!$result->first()) {
+            $result->error = "Your Desired Search Result Not Found !!";
+            $result->header = "includes.error-header";
+            return view('pages.error', ['result' => $result]);
+        } else {
+            $finalResult = new \stdClass();
+            foreach ($result as $key => $userData) {
+                $count = $totalRating = null;
+                $age = date_diff(date_create($userData->dob), date_create('today'))->y;
+                $result->age = $age;
+                $allRatingComment = Ratings::where('agent_id', $userData->id)->get();
+                foreach ($allRatingComment as $ratingComment) {
+                    if ($ratingComment->comment != null) {
+                        $totalRating += $ratingComment->rating;
+                        $count++;
                     }
-                    if ($count != null) {
-                        $result->total_comments = $count;
-                    } else {
-                        $result->total_comments = 'No comments yet!';
-                    }
-                    if ($totalRating != null) {
-                        $result->total_rating = $totalRating / $count;
-                    } else {
-                        $result->total_rating = 'No ratings yet!';
-                    }
-
                 }
-                $finalResult->header = 'includes.search-result-header';
-                $finalResult->users = $result;
-                return view('pages.search-result', ['result' => $finalResult,'errors'=> $validator]);
+                if ($count != null) {
+                    $result->total_comments = $count;
+                } else {
+                    $result->total_comments = 'No comments yet!';
+                }
+                if ($totalRating != null) {
+                    $result->total_rating = $totalRating / $count;
+                } else {
+                    $result->total_rating = 'No ratings yet!';
+                }
+
             }
+            $finalResult->header = 'includes.search-result-header';
+            $finalResult->users = $result;
+            return view('pages.search-result', ['result' => $finalResult,'errors'=> $validator]);
+        }
     }
 
     public function showAgentProfile($id){
@@ -97,7 +98,7 @@ class WebController extends Controller
             $error->header = 'includes.error-header';
             return view('pages.error', ['result' => $error]);
         }
-        
+
         if($user->role != 'agent'){
             return redirect()->back()->with('error-message', 'This is not a guide!');
         }
@@ -726,7 +727,7 @@ class WebController extends Controller
                     $user->country = $request->country;
                     $id = Auth::id();
                     $gl_fb = GuideLinks::Where('user_id', $id)
-                    ->Where('category','facebook')->first();
+                        ->Where('category','facebook')->first();
                     if(isset($request->fb_link)){
                         $gl_fb->link = $request->fb_link;
                         $gl_fb->save();
@@ -849,7 +850,7 @@ class WebController extends Controller
 
     public function checkGuideReviews($id){
         $user = User::find($id);
-        
+
         if($user->role != 'agent'){
             return redirect()->back()->with('error-message', 'This is not a guide!');
         }
@@ -1105,5 +1106,27 @@ class WebController extends Controller
         }
         return $randomString;
     }
+    public function contact(Request $request)
+    {
+        if ($request->isMethod('post')) {
+            $transport = (new \Swift_SmtpTransport('ssl://mail.gotguide.info', 465))
+                ->setUsername("support@gotguide.info")
+                ->setPassword('EmV](A]~bLtf');
 
+            $mailer = new \Swift_Mailer($transport);
+
+            $message = new \Swift_Message('Got Guide - Customer Contact Form');
+            $message->setFrom(['support@gotguide.info' => 'Customer Contact Form Data - Got Guide']);
+            $message->setTo(['customercare@gotguide.info' => 'Customer Care Team']);
+            $message->setBody('<html><body>' .
+                '<h3>UserName : ' . $request->name . '</h3><br/>
+                 <h3>Email : ' . $request->email . '</h3><br/>
+                 <h1>Message : ' . $request->message . '</h1></body></html>','text/html');
+            if ($mailer->send($message)) {
+                return redirect()
+                    ->to('/#contact')
+                    ->with('success-message', 'Details submitted successfully !');
+            }
+        }
+    }
 }
