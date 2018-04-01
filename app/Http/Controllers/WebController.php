@@ -202,7 +202,7 @@ class WebController extends Controller
 
         $mailer = new \Swift_Mailer($transport);
 
-        $message = new \Swift_Message('Got Guide - Password Reset Link');
+        $message = new \Swift_Message('Got Guide - Account verify Link');
         $message->setFrom(['support@gotguide.info' => 'Account verify link - Got Guide']);
         $message->setTo([$request->email => $request->fname.' '.$request->lname]);
         $message->setBody('<html><body>'.
@@ -466,7 +466,7 @@ class WebController extends Controller
 
         $mailer = new \Swift_Mailer($transport);
 
-        $message = new \Swift_Message('Got Guide - Password Reset Link');
+        $message = new \Swift_Message('Got Guide - Account verify Link');
         $message->setFrom(['support@gotguide.info' => 'Account verify link - Got Guide']);
         $message->setTo([$request->email => $request->fname.' '.$request->lname]);
         $message->setBody('<html><body>'.
