@@ -39,7 +39,7 @@ Contact us area
                 <p>Please fill in the form below for any enquiries.</p>
             </div>
             @if(session()->has('success-message'))
-                <div class="alert alert-success">
+                <div class="col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-sm-7 col-md-7 col-lg-7 col-xs-12 alert alert-success">
                     {{ session()->get('success-message') }}
                 </div>
             @endif
