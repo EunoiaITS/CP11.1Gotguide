@@ -35,6 +35,4 @@
         Search popuppage
         ==================-->
     @include('includes.search-modal')
-    
-
     @endsection
