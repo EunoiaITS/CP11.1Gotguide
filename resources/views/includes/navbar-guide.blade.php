@@ -7,8 +7,7 @@
                 <div class="col-sm-offset-8 col-md-offset-8 col-lg-offset-8 col-sm-4 col-md-4 col-lg-4 col-xs-12 padding-right-0">
                     <div class="social-media">
                         <ul>
-                            <li><a href="https://www.facebook.com/gotguidetravel"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#" class="shopping-cart-popup"><i class="fa fa-shopping-cart"></i></a></li>
+                            <li><a target="_blank" href="https://www.facebook.com/gotguidetravel"><i class="fa fa-facebook"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -32,9 +31,8 @@
             <!-- social media mobile screen -->
             <div class="social-media-sm">
                 <ul>
-                    <li><a href="{{ url('/') }}"><i class="fa fa-facebook"></i></a></li>
+                    <li><a target="_blank" href="https://www.facebook.com/gotguidetravel"><i class="fa fa-facebook"></i></a></li>
                     <li><a class="open-popup" href="#"><i class="fa fa-search"></i></a></li>
-                     <li><a href="#" class="shopping-cart-popup"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
             </div>
 
@@ -42,10 +40,10 @@
             <div id="navigation-menu">
                 <nav class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ url('/') }}">home</a></li>
+                        <li><a href="{{ url('/') }}#header">home</a></li>
                         <li><a href="{{ url('/') }}#about-us">about us</a></li>
-                        <li><a href="{{ url('profile/guide') }}">Account</a></li>
-                        <li><a class="log-out-confermation" href="{{ url('/glogout') }}">Logout</a></li>
+                        <li><a href="{{ url('sign-in/user') }}">User</a></li>
+                        <li><a href="{{ url('sign-in/guide') }}">Guide</a></li>
                         <li><a href="{{ url('/') }}#contact-us">contact us</a></li>
                     </ul>
                 </nav>
