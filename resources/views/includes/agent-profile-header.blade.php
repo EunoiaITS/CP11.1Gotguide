@@ -15,13 +15,13 @@
                 </div>
                 <ul class="user-social-media">
                     @if(isset($result->gl_fb->link) && $result->gl_fb->link != '')
-                        <li><a href="{{ $result->gl_fb->link }}"><i class="fa fa-facebook"></i></a></li>
+                        <li><a target="_blank" href="{{ $result->gl_fb->link }}"><i class="fa fa-facebook"></i></a></li>
                     @endif
                     @if(isset($result->gl_tw->link) && $result->gl_tw->link != '')
-                        <li><a href="{{ $result->gl_tw->link }}"><i class="fa fa-twitter"></i></a></li>
+                        <li><a target="_blank" href="{{ $result->gl_tw->link }}"><i class="fa fa-twitter"></i></a></li>
                     @endif
                     @if(isset($result->gl_yt->link) && $result->gl_yt->link != '')
-                        <li><a href="{{ $result->gl_yt->link }}"><i class="fa fa-youtube"></i></a></li>
+                        <li><a target="_blank" href="{{ $result->gl_yt->link }}"><i class="fa fa-youtube"></i></a></li>
                     @endif
                 </ul>
             </div>

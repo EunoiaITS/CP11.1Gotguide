@@ -33,6 +33,7 @@
                 <ul>
                     <li><a target="_blank" href="https://www.facebook.com/gotguidetravel"><i class="fa fa-facebook"></i></a></li>
                     <li><a class="open-popup" href="#"><i class="fa fa-search"></i></a></li>
+                    <li><a href="#" class="shopping-cart-popup"><i class="fa fa-shopping-cart"></i></a></li>
                 </ul>
             </div>
 
@@ -42,8 +43,8 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('/') }}#header">home</a></li>
                         <li><a href="{{ url('/') }}#about-us">about us</a></li>
-                        <li><a href="{{ url('sign-in/user') }}">User</a></li>
-                        <li><a href="{{ url('sign-in/guide') }}">Guide</a></li>
+                        <li><a href="{{ url('profile/guide') }}">Account</a></li>
+                        <li><a class="log-out-confermation" href="{{ url('/ulogout') }}">Logout</a></li>
                         <li><a href="{{ url('/') }}#contact-us">contact us</a></li>
                     </ul>
                 </nav>
